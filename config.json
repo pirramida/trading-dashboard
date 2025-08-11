@@ -1,0 +1,9 @@
+{
+  "exchanges": {
+    "Bybit": {
+      "apiKey": "7dKB2TKhFScbixk5Zx",
+      "apiSecret": "JssfPrEVc9ElILUidivbjQtjHsqsGprhwGOj"
+    }
+  },
+  "windows": []
+}
