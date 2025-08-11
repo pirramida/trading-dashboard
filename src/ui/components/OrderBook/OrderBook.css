@@ -1,0 +1,108 @@
+.orderbook-container {
+  font-family: 'Roboto', sans-serif;
+  background-color: #1e222d;
+  border-radius: 6px;
+  padding: 12px;
+  color: #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.orderbook-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-weight: 500;
+  border-bottom: 1px solid #485c7b;
+  margin-bottom: 8px;
+}
+
+.orderbook-header div {
+  flex: 1;
+  text-align: right;
+}
+
+.orderbook-header div:first-child {
+  text-align: left;
+}
+
+.orderbook-asks {
+  margin-bottom: 12px;
+}
+
+.orderbook-bids {
+  margin-top: 12px;
+}
+
+.orderbook-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 13px;
+}
+
+.orderbook-row.ask {
+  background-color: rgba(239, 83, 80, 0.1);
+}
+
+.orderbook-row.bid {
+  background-color: rgba(38, 166, 154, 0.1);
+}
+
+.orderbook-price, 
+.orderbook-amount, 
+.orderbook-total {
+  flex: 1;
+  text-align: right;
+}
+
+.orderbook-price {
+  text-align: left;
+  color: inherit;
+}
+
+.orderbook-row.ask .orderbook-price {
+  color: #ef5350;
+}
+
+.orderbook-row.bid .orderbook-price {
+  color: #26a69a;
+}
+
+.orderbook-spread {
+  text-align: center;
+  padding: 8px 0;
+  margin: 8px 0;
+  border-top: 1px solid #485c7b;
+  border-bottom: 1px solid #485c7b;
+  font-weight: 500;
+  color: #d9d9d9;
+}
+
+/* Анимация при обновлении данных */
+.orderbook-row {
+  transition: background-color 0.3s ease;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+  .orderbook-container {
+    padding: 8px;
+  }
+  
+  .orderbook-row {
+    font-size: 12px;
+    padding: 3px 0;
+  }
+  
+  .orderbook-header {
+    font-size: 13px;
+  }
+  
+  .orderbook-spread {
+    font-size: 13px;
+    padding: 6px 0;
+  }
+}

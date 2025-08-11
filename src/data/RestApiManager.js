@@ -1,3 +1,6 @@
+const crypto = require('crypto');
+const fetch = require('node-fetch');
+
 class RestApiManager {
   constructor() {
     this.cache = {};
@@ -28,6 +31,7 @@ class RestApiManager {
         timestamp: Date.now()
       };
       
+      this.updateRateLimit(exchange);
       return response;
     } catch (error) {
       console.error(`REST API Error (${exchange}):`, error);
@@ -36,7 +40,7 @@ class RestApiManager {
   }
 
   getExchangeApi(exchange) {
-    // Здесь должна быть логика получения экземпляра API биржи
+    // Этот метод должен быть переопределен в классе Bybit
     throw new Error('Method not implemented');
   }
 
@@ -58,8 +62,13 @@ class RestApiManager {
   queueRequest(exchange, endpoint, params) {
     return new Promise((resolve) => {
       const queueId = `${exchange}:${Date.now()}`;
-      this.requestQueue.set(queueId, { exchange, endpoint, params, resolve });
-      
+      this.requestQueue.set(queueId, {
+        exchange,
+        endpoint,
+        params,
+        resolve
+      });
+
       // Планирование повторного запроса
       setTimeout(() => {
         const request = this.requestQueue.get(queueId);
@@ -75,7 +84,10 @@ class RestApiManager {
   updateRateLimit(exchange) {
     const now = Date.now();
     if (!this.rateLimits[exchange] || now - this.rateLimits[exchange].time > 60000) {
-      this.rateLimits[exchange] = { count: 1, time: now };
+      this.rateLimits[exchange] = {
+        count: 1,
+        time: now
+      };
     } else {
       this.rateLimits[exchange].count += 1;
     }

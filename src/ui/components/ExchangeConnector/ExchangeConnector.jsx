@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './ExchangeConnector.css'; // Импорт CSS файла
 
 const ExchangeConnector = () => {
   const [exchanges, setExchanges] = useState([]);
@@ -65,6 +66,8 @@ const ExchangeConnector = () => {
     }
   };
 
+  const currentStatus = connectionStatus[selectedExchange] || 'not connected';
+
   return (
     <div className="exchange-connector">
       <h3>Exchange Connection</h3>
@@ -72,6 +75,7 @@ const ExchangeConnector = () => {
         <select 
           value={selectedExchange}
           onChange={(e) => setSelectedExchange(e.target.value)}
+          className="exchange-select"
         >
           {exchanges.map(ex => (
             <option key={ex} value={ex}>{ex}</option>
@@ -83,6 +87,7 @@ const ExchangeConnector = () => {
           placeholder="API Key"
           value={apiKey}
           onChange={(e) => setApiKey(e.target.value)}
+          className="api-key-input"
         />
 
         <input
@@ -90,12 +95,14 @@ const ExchangeConnector = () => {
           placeholder="API Secret"
           value={apiSecret}
           onChange={(e) => setApiSecret(e.target.value)}
+          className="api-secret-input"
         />
 
         <div className="connector-buttons">
           <button 
             onClick={handleConnect}
             disabled={isLoading || !apiKey || !apiSecret}
+            className="connect-button"
           >
             {isLoading ? 'Connecting...' : 'Connect'}
           </button>
@@ -103,13 +110,17 @@ const ExchangeConnector = () => {
           <button 
             onClick={handleDisconnect}
             disabled={isLoading || connectionStatus[selectedExchange] !== 'connected'}
+            className="disconnect-button"
           >
             Disconnect
           </button>
         </div>
 
-        <div className="connection-status">
-          Status: {connectionStatus[selectedExchange] || 'not connected'}
+        <div 
+          className="connection-status"
+          data-status={connectionStatus[selectedExchange]}
+        >
+          Status: {currentStatus}
         </div>
       </div>
     </div>

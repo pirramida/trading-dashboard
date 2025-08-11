@@ -1,0 +1,25 @@
+.portfolio-container {
+  padding: 10px;
+  color: #d9d9d9;
+  height: 100%;
+  overflow: auto;
+}
+
+.balances-list, .positions-list {
+  margin-top: 10px;
+}
+
+.balance-row, .position-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid #485c7b;
+}
+
+.position-row.long {
+  color: #26a69a;
+}
+
+.position-row.short {
+  color: #ef5350;
+}
