@@ -161,4 +161,13 @@ contextBridge.exposeInMainWorld("electronAPI", {
       ipcRenderer.off("candles-update", handler);
     };
   },
+  scanStrategySockets: () => ipcRenderer.invoke("scan-strategy-sockets"),
+  sendToStrategy: (params) => ipcRenderer.invoke("send-to-strategy", params),
+  onStrategyMessage: (callback) => {
+    const handler = (_, data) => callback(data);
+    ipcRenderer.on("strategy-message", handler);
+    return () => ipcRenderer.off("strategy-message", handler);
+  },
+  connectToStrategy: (params) =>
+    ipcRenderer.invoke("connect-to-strategy", params), // ← Добавлено!
 });
